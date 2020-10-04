@@ -1,4 +1,4 @@
-#Java HackerRank Solutions
+# Java HackerRank Solutions
 
 Problems solved from the [HackerRank](https://www.hackerrank.com/) platform.
 
