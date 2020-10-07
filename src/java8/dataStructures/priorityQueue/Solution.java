@@ -6,44 +6,6 @@ import java.util.*;
 /*
  * Create the Student and Priorities classes here.
  */
-class Priorities {
-
-    //    PriorityQueue<Student> students = new PriorityQueue<>();
-    PriorityQueue<Student> students = new PriorityQueue<>(
-            Comparator.comparing(Student::getCgpa).reversed()
-                    .thenComparing(Student::getName)
-                    .thenComparing(Student::getId)
-    );
-
-    static final int EVENT = 0;
-    static final int NAME = 1;
-    static final int CGPA = 2;
-    static final int ID = 3;
-
-
-    public List<Student> getStudents(List<String> events) {
-
-        for (String event : events) {
-            String[] e = event.split(" ");
-
-            switch (e[EVENT]) {
-                case "ENTER":
-                    Student student = new Student(Integer.parseInt(e[ID]), e[NAME],
-                            Double.parseDouble(e[CGPA]));
-                    this.students.add(student);
-                    break;
-                case "SERVED":
-                    this.students.poll();
-                    break;
-            }
-        }
-
-        ArrayList<Student> students = new ArrayList<>(this.students);
-        Collections.sort(students);
-        return students;
-    }
-}
-
 class Student implements Comparable<Student> {
 
     private final int id;
@@ -80,6 +42,40 @@ class Student implements Comparable<Student> {
     }
 }
 
+class Priorities {
+
+
+    PriorityQueue<Student> students = new PriorityQueue<>();
+    static final int EVENT = 0;
+    static final int NAME = 1;
+    static final int CGPA = 2;
+
+    static final int ID = 3;
+
+    public List<Student> getStudents(List<String> events) {
+
+        for (String event : events) {
+            String[] e = event.split(" ");
+
+            switch (e[EVENT]) {
+                case "ENTER":
+                    Student student = new Student(Integer.parseInt(e[ID]), e[NAME],
+                            Double.parseDouble(e[CGPA]));
+                    this.students.add(student);
+                    break;
+                case "SERVED":
+                    this.students.poll();
+                    break;
+            }
+        }
+
+        ArrayList<Student> students = new ArrayList<>(this.students);
+        Collections.sort(students);
+        return students;
+    }
+
+}
+
 public class Solution {
     private final static Scanner scan = new Scanner(System.in);
     private final static Priorities priorities = new Priorities();
@@ -99,7 +95,7 @@ public class Solution {
             System.out.println("EMPTY");
         } else {
             for (Student st : students) {
-                System.out.println(st.getId() + " " + st.getName() + " " + st.getId());
+                System.out.println(st.getCgpa() + " " + st.getName() + " " + st.getId());
             }
         }
     }
