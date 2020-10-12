@@ -1,4 +1,4 @@
-package java8.annotations;
+package java8.advanced.annotations;
 
 import java.lang.annotation.*;
 import java.lang.reflect.*;
