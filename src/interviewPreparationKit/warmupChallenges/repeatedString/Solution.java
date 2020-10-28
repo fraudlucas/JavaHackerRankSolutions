@@ -8,10 +8,9 @@ public class Solution {
     // Complete the repeatedString function below.
     static long repeatedString(String s, long n) {
         HashSet<Integer> aIndexes = new HashSet<>();
-        char[] stringArray = s.toCharArray();
 
-        for(int i = 0; i < stringArray.length && i < n; i++) {
-            if (stringArray[i] == 'a') {
+        for(int i = 0; i < s.length() && i < n; i++) {
+            if (s.charAt(i) == 'a') {
                 aIndexes.add(i);
             }
         }
@@ -21,7 +20,8 @@ public class Solution {
         if (s.length() < n) {
 
             for (int index : aIndexes) {
-                matchedIndexes += (n - index + 1) / s.length();
+                index++;
+                matchedIndexes += (n - index) / s.length();
             }
         }
 
