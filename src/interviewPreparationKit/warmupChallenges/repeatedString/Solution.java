@@ -1,0 +1,51 @@
+package interviewPreparationKit.warmupChallenges.repeatedString;
+
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+
+    // Complete the repeatedString function below.
+    static long repeatedString(String s, long n) {
+        HashSet<Integer> aIndexes = new HashSet<>();
+        char[] stringArray = s.toCharArray();
+
+        for(int i = 0; i < stringArray.length && i < n; i++) {
+            if (stringArray[i] == 'a') {
+                aIndexes.add(i);
+            }
+        }
+
+        long matchedIndexes = aIndexes.size();
+
+        if (s.length() < n) {
+
+            for (int index : aIndexes) {
+                matchedIndexes += (n - index + 1) / s.length();
+            }
+        }
+
+        return matchedIndexes;
+    }
+
+    private static final Scanner scanner = new Scanner(System.in);
+
+    public static void main(String[] args) throws IOException {
+        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
+
+        String s = scanner.nextLine();
+
+        long n = scanner.nextLong();
+        scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
+
+        long result = repeatedString(s, n);
+
+        bufferedWriter.write(String.valueOf(result));
+        bufferedWriter.newLine();
+
+        bufferedWriter.close();
+
+        scanner.close();
+    }
+}
+
